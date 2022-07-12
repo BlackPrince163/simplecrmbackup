@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11.1-alpine
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: simplecrm
+      POSTGRES_USER: simplecrm
+      POSTGRES_PASSWORD: simplecrm
+    volumes:
+      - db:/var/lib/postgresql/data
+
+volumes:
+  db:
