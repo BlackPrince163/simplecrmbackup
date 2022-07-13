@@ -75,7 +75,7 @@ export default {
           username: this.username,
           password: this.password1
         }
-        awsit axios
+        await axios
             .post('/api/v1/users/', formData)
             .then(response => {
               toast({

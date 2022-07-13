@@ -4,6 +4,7 @@ import SignUp from "../views/SignUp";
 import LogIn from "@/views/LogIn";
 import Dashboard from "../views/dashboard/Dashboard";
 import MyAccount from "../views/dashboard/MyAccount";
+import Leads from "../views/dashboard/Leads";
 import store from "@/store";
 
 const routes = [
@@ -34,6 +35,14 @@ const routes = [
         path: '/dashboard/my-account',
         name: 'MyAccount',
         component: MyAccount,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
+        path: '/dashboard/leads',
+        name: 'Leads',
+        component: Leads,
         meta: {
             requireLogin: true
         }
