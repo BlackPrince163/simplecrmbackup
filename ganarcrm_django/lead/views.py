@@ -12,3 +12,7 @@ class LeadViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.queryset.filter(created_by=self.request.user)
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)
+
