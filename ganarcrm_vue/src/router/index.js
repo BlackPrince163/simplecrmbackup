@@ -6,6 +6,8 @@ import Dashboard from "../views/dashboard/Dashboard";
 import MyAccount from "../views/dashboard/MyAccount";
 import Leads from "../views/dashboard/Leads";
 import AddLead from "../views/dashboard/AddLead";
+import Lead from "../views/dashboard/Lead";
+import EditLead from "../views/dashboard/EditLead";
 import store from "@/store";
 
 const routes = [
@@ -57,6 +59,22 @@ const routes = [
         }
     },
     {
+        path: '/dashboard/leads/:id',
+        name: 'Lead',
+        component: Lead,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
+        path: '/dashboard/leads/:id/edit',
+        name: 'EditLead',
+        component: EditLead,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
         path: '/about',
         name: 'about',
         // route level code-splitting
@@ -72,12 +90,12 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requireLogin) && !store.state.isAuthenticated) {
-    next('/log-in')
-      this.$router.push('/log-in')
-  } else {
-    next()
-  }
+    if (to.matched.some(record => record.meta.requireLogin) && !store.state.isAuthenticated) {
+        next('/log-in')
+        this.$router.push('/log-in')
+    } else {
+        next()
+    }
 })
 
 export default router
