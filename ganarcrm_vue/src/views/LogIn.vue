@@ -34,6 +34,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "LogIn",
   data() {
@@ -64,18 +65,36 @@ export default {
             axios.defaults.headers.common['Authorization'] = 'Token ' + token
 
             localStorage.setItem('token', token)
-
-            this.$router.push('/dashboard/my-account')
           })
           .catch(error => {
-              if (error.response) {
-                for (const property in error.response.data) {
-                  this.errors.push(`${property}: ${error.response.data[property]}`)
-                }
-              } else if (error.message) {
-                this.errors.push('Something went wrong. Please try again!')
+            if (error.response) {
+              for (const property in error.response.data) {
+                this.errors.push(`${property}: ${error.response.data[property]}`)
               }
-            })
+            } else if (error.message) {
+              this.errors.push('Something went wrong. Please try again!')
+            }
+          })
+
+
+
+      await axios
+          .get('/api/v1/users/me/')
+          .then(response => {
+
+            console.log(response.data)
+            this.$store.commit('setUser', {'id': response.data.id, 'username': response.data.username})
+            //
+            localStorage.setItem('username', response.data.username)
+            localStorage.setItem('userid', response.data.id)
+
+          })
+          .catch(error => {
+            console.log(error)
+          })
+
+      this.$router.push(`/dashboard/my-account/`)
+
       this.$store.commit('setIsLoading', false)
     }
   }
