@@ -17,7 +17,6 @@ class UserSerializer(serializers.ModelSerializer):
 
 class TeamSerializer(serializers.ModelSerializer):
     members = UserSerializer(many=True, read_only=True)
-
     class Meta:
         model = Team
         fields = (

@@ -33,7 +33,7 @@ export default {
       axios.defaults.headers.common['Authorization'] = ""
     }
 
-    if (!this.$store.state.team.id) {
+    if (!this.$store.state.team.name) {
       this.$router.push('/dashboard/add-team/')
     }
   },
