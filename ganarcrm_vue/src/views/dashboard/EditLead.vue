@@ -93,8 +93,7 @@
                   <option
                       v-for="member in team.members"
                       v-bind:key="member.id"
-                      v-bind:value="member.id"
-                  >
+                      v-bind:value="member.id">
                     {{ member.username }}
                   </option>
                 </select>
@@ -124,7 +123,7 @@ export default {
     return {
       lead: {},
       team: {
-        members: []
+        members: [],
       }
     }
   },

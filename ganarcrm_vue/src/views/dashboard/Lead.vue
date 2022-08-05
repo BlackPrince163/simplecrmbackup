@@ -8,7 +8,9 @@
       <div class="column is-6">
         <div class="box">
           <h2 class="subtitle">Details</h2>
-
+          <div v-if="lead.assigned_to">
+            <p><strong>Assigned to: </strong>{{ lead.assigned_to.username }}</p>
+          </div>
           <p><strong>Status: </strong>{{ lead.status }}</p>
           <p><strong>Priority: </strong>{{ lead.priority }}</p>
           <p><strong>Confidence: </strong>{{ lead.confidence }}</p>
@@ -35,6 +37,7 @@
 
 <script>
 import axios from "axios";
+
 export default {
   name: "Lead",
   data() {
