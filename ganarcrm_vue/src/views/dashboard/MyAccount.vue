@@ -3,7 +3,7 @@
     <div className="columns is-multiline">
       <div className="column is-12">
         <h1 className="title">My account</h1>
-
+        <h2 class="subtitle">{{ $store.state.user.username }}</h2>
         <div class="column is-12">
           <button @click="logout()" class="button is-danger">Log out</button>
         </div>

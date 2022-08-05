@@ -3,8 +3,11 @@
     <div className="columns is-multiline">
       <div className="column is-12">
         <h1 class="title">{{ team.name }}</h1>
-        
-        <router-link :to="{'name': 'AddMember'}" class="button is-primary">Add Member</router-link>
+
+        <div v-if="team.created_by.id === $store.state.user.id">
+          <router-link :to="{'name': 'AddMember'}" class="button is-primary">Add Member</router-link>
+        </div>
+
       </div>
 
       <div className="column is-12">
@@ -35,7 +38,8 @@ export default {
   data() {
     return {
       team: {
-        members: []
+        members: [],
+        created_by: {}
       }
     }
   },

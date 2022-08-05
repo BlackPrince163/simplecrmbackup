@@ -80,16 +80,22 @@ export default {
         await axios
             .post('/api/v1/users/', formData)
             .then(response => {
-              toast({
-                message: 'The member was added',
-                type: 'is-success',
-                dismissible: true,
-                pauseOnHover: true,
-                duration: 2000,
-                position: 'bottom-right',
-              })
 
-              // this.$router.push({'name': 'Team'})
+              const emailData = {'email': this.username}
+              axios
+                  .post('/api/v1/teams/add_member/', emailData)
+                  .then(response => {
+                    this.$router.push({'name': 'Team'})
+
+                    toast({
+                      message: 'The member was added',
+                      type: 'is-success',
+                      dismissible: true,
+                      pauseOnHover: true,
+                      duration: 2000,
+                      position: 'bottom-right',
+                    })
+                  })
             })
             .catch(error => {
               if (error.response) {
@@ -100,36 +106,6 @@ export default {
                 this.errors.push('Something went wrong. Please try again!')
               }
             })
-
-        const emailData = {'email': this.username}
-
-        await axios
-            .post('/api/v1/teams/add_member/', emailData)
-            .then(response => {
-              console.log(response)
-              // toast({
-              //   message: 'The member was added',
-              //   type: 'is-success',
-              //   dismissible: true,
-              //   pauseOnHover: true,
-              //   duration: 2000,
-              //   position: 'bottom-right',
-              // })
-
-              this.$router.push({'name': 'Team'})
-            })
-            .catch(error => {
-              if (error.response) {
-                for (const property in error.response.data) {
-                  this.errors.push(`${property}: ${error.response.data[property]}`)
-                }
-              } else if (error.message) {
-                this.errors.push('Something went wrong. Please try again!')
-              }
-            })
-
-
-
         this.$store.commit('setIsLoading', false)
       }
 
