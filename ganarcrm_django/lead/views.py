@@ -16,7 +16,6 @@ class LeadViewSet(viewsets.ModelViewSet):
         serializer.save(team=team, created_by=self.request.user)
 
     def perform_update(self, serializer):
-        obj = self.get_object()
         member_id = self.request.data['assigned_to']
 
         if member_id:

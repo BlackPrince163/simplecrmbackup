@@ -88,8 +88,8 @@
             <label>Assigned to</label>
             <div class="control">
               <div class="select">
-                <select v-model="lead.assigned_to">
-                  <option value="" selected>Select member</option>
+                <select v-model="this.lead.assigned_to">
+                  <option value="null" disabled>Select member</option>
                   <option
                       v-for="member in team.members"
                       v-bind:key="member.id"
@@ -121,15 +121,20 @@ export default {
   name: "EditLead",
   data() {
     return {
-      lead: {},
+      lead: {
+        assigned_to: {
+          id: 0,
+          username: ''
+        },
+      },
       team: {
         members: [],
       }
     }
   },
   mounted() {
-    this.getLead()
     this.getTeam()
+    this.getLead()
   },
   methods: {
     async getLead() {
@@ -149,7 +154,9 @@ export default {
     },
     async submitForm() {
       this.$store.commit('setIsLoading', true)
-
+      if (this.lead.assigned_to) {
+        this.lead.assigned_to = this.lead.assigned_to.id
+      }
       const leadID = this.$route.params.id
 
       axios

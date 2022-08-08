@@ -54,14 +54,14 @@ export default {
     async getClients() {
       this.$store.commit('setIsLoading', true)
 
-      // await axios
-      //     .get('/api/v1/clients/')
-      //     .then(response => {
-      //       this.leads = response.data
-      //     })
-      //     .catch(error => {
-      //       console.log(error)
-      //     })
+      await axios
+          .get('/api/v1/clients/')
+          .then(response => {
+            this.clients = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
 
       this.$store.commit('setIsLoading', false)
     }
