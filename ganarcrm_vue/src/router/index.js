@@ -11,6 +11,7 @@ import EditLead from "../views/dashboard/EditLead";
 import AddTeam from "../views/dashboard/AddTeam";
 import Team from "../views/dashboard/Team";
 import AddMember from "../views/dashboard/AddMember";
+import Clients from "../views/dashboard/Clients";
 import store from "@/store";
 
 const routes = [
@@ -97,6 +98,14 @@ const routes = [
         path: '/dashboard/leads/:id/edit',
         name: 'EditLead',
         component: EditLead,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
+        path: '/dashboard/clients',
+        name: 'Clients',
+        component: Clients,
         meta: {
             requireLogin: true
         }
