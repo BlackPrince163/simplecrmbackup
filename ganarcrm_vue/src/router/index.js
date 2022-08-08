@@ -15,6 +15,7 @@ import Clients from "../views/dashboard/Clients";
 import AddClient from "../views/dashboard/AddClient";
 import Client from "../views/dashboard/Client";
 import store from "@/store";
+import EditClient from "@/views/dashboard/EditClient";
 
 const routes = [
     {
@@ -124,6 +125,14 @@ const routes = [
         path: '/dashboard/clients/:id',
         name: 'Client',
         component: Client,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
+        path: '/dashboard/clients/:id/edit',
+        name: 'EditClient',
+        component: EditClient,
         meta: {
             requireLogin: true
         }
