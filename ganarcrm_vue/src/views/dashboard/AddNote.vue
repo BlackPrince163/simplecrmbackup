@@ -17,7 +17,7 @@
           <div class="field">
             <label>Body</label>
             <div class="control">
-              <textarea class="textarea" v-model="contact_person"></textarea>
+              <textarea class="textarea" v-model="this.body"></textarea>
             </div>
           </div>
 

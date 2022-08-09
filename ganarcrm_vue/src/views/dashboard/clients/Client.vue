@@ -3,7 +3,8 @@
     <div className="columns is-multiline">
       <div className="column is-12">
         <h1 class="title">{{ client.name }}</h1>
-        <router-link :to="{ name: 'EditClient', params: { client: client.id }}" class="button is-light">Edit</router-link>
+        <router-link :to="{ name: 'EditClient', params: { client: client.id }}" class="button is-light">Edit
+        </router-link>
       </div>
       <div class="column is-6">
         <div class="box">
@@ -28,8 +29,13 @@
 
       <div class="column is-12">
         <h2 class="subtitle">Notes</h2>
-        <router-link :to="{ name: 'AddNote', params: { client: client.id }}" class="button is-light">Add Note</router-link>
-<!--        <router-link :to="{ name: 'AddNote', params: { id: client.id }}">Add note</router-link>-->
+        <router-link :to="{ name: 'AddNote', params: { client: client.id }}" class="button is-success mb-6">Add Note
+        </router-link>
+
+        <div class="box" v-for="note in notes" :key="note.id">
+          <h3 class="is-size-4">{{ note.name }}</h3>
+          <p>{{ note.body }}</p>
+        </div>
       </div>
 
     </div>
@@ -43,7 +49,8 @@ export default {
   name: "Client",
   data() {
     return {
-      client: {}
+      client: {},
+      notes: [],
     }
   },
   mounted() {
@@ -63,6 +70,16 @@ export default {
           .catch(error => {
             console.log(error)
           })
+
+      await axios
+          .get(`api/v1/notes/?client_id=${clientID}`)
+          .then(response => {
+            this.notes = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+
       this.$store.commit('setIsLoading', false)
     }
   }
