@@ -15,7 +15,8 @@ import Clients from "../views/dashboard/clients/Clients";
 import AddClient from "../views/dashboard/clients/AddClient";
 import Client from "../views/dashboard/clients/Client";
 import EditClient from "../views/dashboard/clients/EditClient";
-import AddNote from "../views/dashboard/AddNote";
+import AddNote from "../views/dashboard/notes/AddNote";
+import EditNote from "../views/dashboard/notes/EditNote";
 import store from "@/store";
 
 const routes = [
@@ -142,6 +143,14 @@ const routes = [
         path: '/dashboard/clients/:id/add-note',
         name: 'AddNote',
         component: AddNote,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
+        path: '/dashboard/clients/:id/edit-note/:note_id',
+        name: 'EditNote',
+        component: EditNote,
         meta: {
             requireLogin: true
         }

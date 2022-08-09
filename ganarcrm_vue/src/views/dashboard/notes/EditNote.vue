@@ -2,7 +2,7 @@
   <div className="container">
     <div className="columns is-multiline">
       <div className="column is-12">
-        <h1 className="title">Add note</h1>
+        <h1 className="title">Edit note</h1>
       </div>
 
       <div className="column is-12">
@@ -10,20 +10,20 @@
           <div class="field">
             <label>Name</label>
             <div class="control">
-              <input type="text" class="input" v-model="this.name">
+              <input type="text" class="input" v-model="note.name">
             </div>
           </div>
 
           <div class="field">
             <label>Body</label>
             <div class="control">
-              <textarea class="textarea" v-model="this.body"></textarea>
+              <textarea class="textarea" v-model="note.body"></textarea>
             </div>
           </div>
 
           <div class="field">
             <div class="control">
-              <button class="button is-success">Submit</button>
+              <button class="button is-success">Update</button>
             </div>
           </div>
 
@@ -38,35 +38,49 @@ import axios from 'axios'
 import {toast} from "bulma-toast";
 
 export default {
-  name: "AddNote",
+  name: "EditNote",
   data() {
     return {
-      name: "",
-      body: "",
+      note: {}
     }
   },
+  mounted() {
+    this.getNote()
+  },
   methods: {
+    async getNote() {
+      this.$store.commit('setIsLoading', true)
+
+      const noteID = this.$route.params.note_id
+      const cliendID = this.$route.params.id
+
+      await axios
+          .get(`api/v1/notes/${noteID}/?client_id=${cliendID}`)
+          .then(response => {
+            this.note = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      this.$store.commit('setIsLoading', false)
+    },
     async submitForm() {
       this.$store.commit('setIsLoading', true)
 
-      console.log('submit form')
-      const note = {
-        name: this.name,
-        body: this.body,
-        client_id: this.$route.params.id
-      }
+      const cliendID = this.$route.params.id
+
       await axios
-          .post('api/v1/notes/', note)
+          .patch(`api/v1/notes/${this.note.id}/?client_id=${cliendID}`, this.note)
           .then(response => {
             toast({
-              message: 'The note was added',
+              message: 'The note was updated',
               type: 'is-success',
               dismissible: true,
               pauseOnHover: true,
               duration: 2000,
               position: 'bottom-right',
             })
-            this.$router.push({ name: 'Client', params: {id: this.$route.params.id }})
+            this.$router.push({name: 'Client', params: {id: this.$route.params.id}})
           })
           .catch(error => {
             console.log(error)

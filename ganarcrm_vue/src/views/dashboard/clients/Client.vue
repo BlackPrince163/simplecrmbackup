@@ -35,6 +35,8 @@
         <div class="box" v-for="note in notes" :key="note.id">
           <h3 class="is-size-4">{{ note.name }}</h3>
           <p>{{ note.body }}</p>
+          <router-link :to="{ name: 'EditNote', params: { client: client.id, note_id: note.id }}" class="button is-success mt-6">Edit Note
+          </router-link>
         </div>
       </div>
 
