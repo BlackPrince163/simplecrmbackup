@@ -17,6 +17,7 @@ import Client from "../views/dashboard/clients/Client";
 import EditClient from "../views/dashboard/clients/EditClient";
 import AddNote from "../views/dashboard/notes/AddNote";
 import EditNote from "../views/dashboard/notes/EditNote";
+import EditMember from "../views/dashboard/EditMember";
 import store from "@/store";
 
 const routes = [
@@ -63,6 +64,14 @@ const routes = [
         path: '/dashboard/team',
         name: 'Team',
         component: Team,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
+        path: '/dashboard/edit-member/:id',
+        name: 'EditMember',
+        component: EditMember,
         meta: {
             requireLogin: true
         }
