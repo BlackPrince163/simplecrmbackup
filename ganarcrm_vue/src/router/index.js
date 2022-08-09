@@ -4,18 +4,19 @@ import SignUp from "../views/SignUp";
 import LogIn from "@/views/LogIn";
 import Dashboard from "../views/dashboard/Dashboard";
 import MyAccount from "../views/dashboard/MyAccount";
-import Leads from "../views/dashboard/Leads";
-import AddLead from "../views/dashboard/AddLead";
-import Lead from "../views/dashboard/Lead";
-import EditLead from "../views/dashboard/EditLead";
-import AddTeam from "../views/dashboard/AddTeam";
-import Team from "../views/dashboard/Team";
+import Leads from "../views/dashboard/leads/Leads";
+import AddLead from "../views/dashboard/leads/AddLead";
+import Lead from "../views/dashboard/leads/Lead";
+import EditLead from "../views/dashboard/leads/EditLead";
+import AddTeam from "../views/dashboard/teams/AddTeam";
+import Team from "../views/dashboard/teams/Team";
 import AddMember from "../views/dashboard/AddMember";
-import Clients from "../views/dashboard/Clients";
-import AddClient from "../views/dashboard/AddClient";
-import Client from "../views/dashboard/Client";
+import Clients from "../views/dashboard/clients/Clients";
+import AddClient from "../views/dashboard/clients/AddClient";
+import Client from "../views/dashboard/clients/Client";
+import EditClient from "../views/dashboard/clients/EditClient";
+import AddNote from "../views/dashboard/AddNote";
 import store from "@/store";
-import EditClient from "@/views/dashboard/EditClient";
 
 const routes = [
     {
@@ -133,6 +134,14 @@ const routes = [
         path: '/dashboard/clients/:id/edit',
         name: 'EditClient',
         component: EditClient,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
+        path: '/dashboard/clients/:id/add-note',
+        name: 'AddNote',
+        component: AddNote,
         meta: {
             requireLogin: true
         }
