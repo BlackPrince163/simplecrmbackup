@@ -4,12 +4,17 @@ from rest_framework import viewsets
 from team.models import Team
 from .models import Lead
 from .serializers import LeadSerializer
-from django.db.models import Q
+from rest_framework.pagination import PageNumberPagination
+
+
+class LeadPagination(PageNumberPagination):
+    page_size = 10
 
 
 class LeadViewSet(viewsets.ModelViewSet):
     serializer_class = LeadSerializer
     queryset = Lead.objects.all()
+    pagination_class = LeadPagination
 
     def perform_create(self, serializer):
         team = Team.objects.filter(members__in=[self.request.user]).first()
