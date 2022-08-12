@@ -24,7 +24,7 @@
               <td>{{ lead.company }}</td>
               <td>{{ lead.contact_person }}</td>
               <td>
-                <div v-if="lead.assigned_to">{{ lead.assigned_to.username }}</div>
+                <div v-if="lead.assigned_to">{{ lead.assigned_to.first_name }} {{ lead.assigned_to.last_name }}</div>
               </td>
               <td>{{ lead.status }}</td>
               <td><router-link :to="{ name: 'Lead', params: {id: lead.id}}">Details</router-link></td>

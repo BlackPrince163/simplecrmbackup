@@ -9,7 +9,7 @@
         <div class="box">
           <h2 class="subtitle">Details</h2>
           <div v-if="lead.assigned_to">
-            <p><strong>Assigned to: </strong>{{ lead.assigned_to.username }}</p>
+            <p><strong>Assigned to: </strong>{{ lead.assigned_to.first_name }} {{ lead.assigned_to.last_name }}</p>
           </div>
           <p><strong>Status: </strong>{{ lead.status }}</p>
           <p><strong>Priority: </strong>{{ lead.priority }}</p>
