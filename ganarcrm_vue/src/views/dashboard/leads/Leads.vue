@@ -59,11 +59,11 @@ export default {
   methods: {
     async goToNextPage() {
       this.currentPage += 1
-      this.getLeads()
+      await this.getLeads()
     },
     async goToPreviousPage() {
       this.currentPage -= 1
-      this.getLeads()
+      await this.getLeads()
     },
     async getLeads() {
       this.$store.commit('setIsLoading', true)

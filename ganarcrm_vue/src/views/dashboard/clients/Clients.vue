@@ -28,6 +28,10 @@
             </tr>
             </tbody>
           </table>
+          <div class="buttons">
+          <button class="button is-light" v-if="showPreviousButton" @click="goToPreviousPage()">Previous</button>
+          <button class="button is-light" v-if="showNextButton" @click="goToNextPage()">Next</button>
+        </div>
         </div>
         <div v-else>
           <p>You don't have any clients yet...</p>
@@ -44,20 +48,43 @@ export default {
   name: "Clients",
   data() {
     return {
-      clients: []
+      clients: [],
+      showNextButton: false,
+      showPreviousButton: false,
+      currentPage: 1,
     }
   },
   mounted() {
     this.getClients()
   },
   methods: {
+    async goToNextPage() {
+      this.currentPage += 1
+      await this.getClients()
+    },
+    async goToPreviousPage() {
+      this.currentPage -= 1
+      await this.getClients()
+    },
     async getClients() {
       this.$store.commit('setIsLoading', true)
 
+      this.showNextButton = false
+      this.showPreviousButton = false
+
       await axios
-          .get('/api/v1/clients/')
+          .get(`/api/v1/clients/?page=${this.currentPage}`)
           .then(response => {
-            this.clients = response.data
+            this.clients = response.data.results
+
+             if (response.data.next) {
+              this.showNextButton = true
+            }
+
+            if (response.data.previous) {
+              this.showPreviousButton = true
+            }
+
           })
           .catch(error => {
             console.log(error)

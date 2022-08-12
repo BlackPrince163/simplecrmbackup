@@ -4,7 +4,7 @@ from django.http import Http404
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from rest_framework.pagination import PageNumberPagination
 
 from lead.models import Lead
 from team.models import Team
@@ -12,9 +12,14 @@ from .models import Client, Note
 from .serializers import ClientSerializer, NoteSerializer
 
 
+class ClientPagination(PageNumberPagination):
+    page_size = 10
+
+
 class ClientViewSet(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
     queryset = Client.objects.all()
+    pagination_class = ClientPagination
 
     def perform_create(self, serializer):
         team = Team.objects.filter(members__in=[self.request.user]).first()
