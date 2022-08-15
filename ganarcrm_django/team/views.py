@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.contrib.auth.models import User
-from team.models import Team
+from team.models import Team, Plan
 from team.serializers import TeamSerializer, UserSerializer
 
 
@@ -42,9 +42,32 @@ class UserDetail(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @api_view(['GET'])
 def get_my_team(request):
     team = Team.objects.filter(members__in=[request.user]).first()
+    serializer = TeamSerializer(team)
+
+    return Response(serializer.data)
+
+
+@api_view(['POST'])
+def upgrade_plan(request):
+    team = Team.objects.filter(members__in=[request.user]).first()
+    plan = request.data['plan']
+
+    print('Plan', plan)
+
+    if plan == 'free':
+        plan = Plan.objects.get(name='Free')
+    elif plan == 'smallteam':
+        plan = Plan.objects.get(name='Small team')
+    elif plan == 'bigteam':
+        plan = Plan.objects.get(name='Big team')
+
+    team.plan = plan
+    team.save()
+
     serializer = TeamSerializer(team)
 
     return Response(serializer.data)

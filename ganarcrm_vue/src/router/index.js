@@ -18,6 +18,8 @@ import EditClient from "../views/dashboard/clients/EditClient";
 import AddNote from "../views/dashboard/notes/AddNote";
 import EditNote from "../views/dashboard/notes/EditNote";
 import EditMember from "../views/dashboard/EditMember";
+import Plans from "../views/dashboard/Plans";
+import PlansThankyou from "../views/dashboard/PlansThankyou";
 import store from "@/store";
 
 const routes = [
@@ -64,6 +66,22 @@ const routes = [
         path: '/dashboard/team',
         name: 'Team',
         component: Team,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
+        path: '/dashboard/team/plans',
+        name: 'Plans',
+        component: Plans,
+        meta: {
+            requireLogin: true
+        }
+    },
+    {
+        path: '/dashboard/team/plans/thankyou',
+        name: 'PlansThankyou',
+        component: PlansThankyou,
         meta: {
             requireLogin: true
         }
