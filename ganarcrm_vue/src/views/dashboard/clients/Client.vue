@@ -5,6 +5,7 @@
         <h1 class="title">{{ client.name }}</h1>
         <router-link :to="{ name: 'EditClient', params: { client: client.id }}" class="button is-light">Edit
         </router-link>
+        <button @click="deleteClient" class="button is-danger">Delete</button>
       </div>
       <div class="column is-6">
         <div class="box">
@@ -46,6 +47,7 @@
 
 <script>
 import axios from "axios";
+import {toast} from "bulma-toast";
 
 export default {
   name: "Client",
@@ -59,6 +61,30 @@ export default {
     this.getClient()
   },
   methods: {
+    async deleteClient() {
+      this.$store.commit('setIsLoading', true)
+
+      const clientID = this.$route.params.id
+
+      await axios
+          .post(`api/v1/clients/delete_client/${clientID}/`)
+          .then(response => {
+            console.log(response.data)
+            this.$router.push({'name': 'Clients'})
+            toast({
+              message: 'The client was deleted!',
+              type: 'is-success',
+              dismissible: true,
+              pauseOnHover: true,
+              duration: 2000,
+              position: 'bottom-right',
+            })
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      this.$store.commit('setIsLoading', false)
+    },
     async getClient() {
       this.$store.commit('setIsLoading', true)
 
