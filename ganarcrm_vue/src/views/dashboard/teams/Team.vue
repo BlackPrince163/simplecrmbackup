@@ -4,6 +4,14 @@
       <div className="column is-12">
         <h1 class="title">{{ team.name }}</h1>
 
+        <hr>
+
+        <p><strong>Plan: </strong>{{ $store.state.team.plan }}</p>
+        <p><strong>Max clients: </strong>{{ $store.state.team.max_clients }}</p>
+        <p><strong>Max leads: </strong>{{ $store.state.team.max_leads }}</p>
+
+        <hr>
+
         <div v-if="team.created_by.id === $store.state.user.id">
           <router-link :to="{'name': 'AddMember'}" class="button is-primary">Add Member</router-link>
         </div>

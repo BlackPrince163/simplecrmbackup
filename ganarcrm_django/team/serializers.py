@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from team.models import Team
+from team.models import Team, Plan
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,9 +15,23 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
 
+class PlanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Plan
+        fields = (
+            "id",
+            "name",
+            "max_leads",
+            "max_clients",
+            "price",
+
+        )
+
+
 class TeamSerializer(serializers.ModelSerializer):
     members = UserSerializer(many=True, read_only=True)
     created_by = UserSerializer(read_only=True)
+    plan = PlanSerializer(read_only=True)
 
     class Meta:
         model = Team
@@ -26,4 +40,5 @@ class TeamSerializer(serializers.ModelSerializer):
             "name",
             "members",
             "created_by",
+            "plan",
         )

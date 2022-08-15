@@ -1,5 +1,4 @@
-from django.contrib.auth.models import User
-from rest_framework import viewsets
+from rest_framework import viewsets, filters
 from django.http import Http404
 
 from rest_framework.decorators import api_view
@@ -20,6 +19,8 @@ class ClientViewSet(viewsets.ModelViewSet):
     serializer_class = ClientSerializer
     queryset = Client.objects.all()
     pagination_class = ClientPagination
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name', 'contact_person')
 
     def perform_create(self, serializer):
         team = Team.objects.filter(members__in=[self.request.user]).first()
