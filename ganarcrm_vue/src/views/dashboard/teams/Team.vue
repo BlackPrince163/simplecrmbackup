@@ -67,7 +67,7 @@ export default {
 
 
       await axios
-          .get('api/v1/teams/get_my_team')
+          .get('api/v1/teams/get_my_team/')
           .then(response => {
             this.team = response.data
           })

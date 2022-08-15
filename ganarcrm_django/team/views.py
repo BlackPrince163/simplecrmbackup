@@ -75,8 +75,21 @@ def upgrade_plan(request):
     team.save()
 
     serializer = TeamSerializer(team)
-
     return Response(serializer.data)
+
+
+@api_view(['POST'])
+def cancel_plan(request):
+    team = Team.objects.filter(members__in=[request.user]).first()
+    plan_free = Plan.objects.get(name='Free')
+
+    team.plan = plan_free
+    team.plan_status = Team.PLAN_CANCELLED
+    team.save()
+
+    serializer = TeamSerializer(team)
+    return Response(serializer.data)
+
 
 
 @api_view(['POST'])
