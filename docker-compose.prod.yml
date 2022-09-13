@@ -25,6 +25,8 @@ services:
 
   db:
     image: postgres:11.1-alpine
+    ports:
+      - 5432:5432
     environment:
       POSTGRES_DB: simplecrm
       POSTGRES_USER: simplecrm
@@ -32,6 +34,7 @@ services:
     volumes:
       - db:/var/lib/postgresql/data
     restart: always
+
 
 volumes:
   db:
