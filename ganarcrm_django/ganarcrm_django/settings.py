@@ -103,7 +103,7 @@ WSGI_APPLICATION = 'ganarcrm_django.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": env.str("DATABASES_ENGINE", default="django.db.backends.postgresql"),
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": env.str("DATABASES_NAME", default="simplecrm"),
         "USER": env.str("DATABASES_USER", default="simplecrm"),
         "PASSWORD": env.str("DATABASES_PASSWORD", default="simplecrm"),
