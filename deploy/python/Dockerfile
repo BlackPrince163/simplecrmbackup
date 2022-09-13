@@ -16,5 +16,5 @@ RUN python ganarcrm_django/manage.py collectstatic --no-input
 
 EXPOSE 8000
 
-CMD python src/manage.py migrate && \
-    gunicorn --chdir src --bind 0.0.0.0:8000 testdjango.wsgi
+CMD python ganarcrm_django/manage.py migrate && \
+    gunicorn --chdir ganarcrm_django --bind 0.0.0.0:8000 testdjango.wsgi
