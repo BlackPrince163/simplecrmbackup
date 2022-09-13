@@ -27,8 +27,8 @@ services:
     image: postgres:11.1-alpine
     environment:
       POSTGRES_DB: simplecrm
-      POSTGRES_USER: simplcrm
-      POSTGRES_PASSWORD: simplcrm
+      POSTGRES_USER: simplecrm
+      POSTGRES_PASSWORD: simplecrm
     volumes:
       - db:/var/lib/postgresql/data
     restart: always
