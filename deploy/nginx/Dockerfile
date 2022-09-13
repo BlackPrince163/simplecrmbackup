@@ -1,4 +1,4 @@
-FROM simplecrm-python:latest AS app
+FROM simplecrm-app:latest AS app
 
 FROM nginx:1.21-alpine
 
