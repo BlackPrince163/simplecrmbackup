@@ -2,8 +2,6 @@ FROM python:3.8
 
 ENV PYTHONUNBUFFERED 1
 
-RUN pip install poetry==1.1.8 && poetry config virtualenvs.create false
-
 WORKDIR /app
 COPY requirements.txt .
 RUN pip install --upgrade pip

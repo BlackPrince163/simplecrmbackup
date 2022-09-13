@@ -103,10 +103,10 @@ WSGI_APPLICATION = 'ganarcrm_django.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": env.str("DATABASES_ENGINE"),
-        "NAME": env.str("DATABASES_NAME"),
-        "USER": env.str("DATABASES_USER"),
-        "PASSWORD": env.str("DATABASES_PASSWORD"),
+        "ENGINE": env.str("DATABASES_ENGINE", default="django.db.backends.postgresql"),
+        "NAME": env.str("DATABASES_NAME", default="simplecrm"),
+        "USER": env.str("DATABASES_USER", default="simplecrm"),
+        "PASSWORD": env.str("DATABASES_PASSWORD", default="simplecrm"),
         "HOST": env.str("DATABASES_HOST", default="127.0.0.1"),
         "PORT": env.int("DATABASES_PORT", default="5432"),
     }
