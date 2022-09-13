@@ -148,6 +148,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = "static"
+
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "media/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -162,3 +166,7 @@ STRIPE_SECRET_KEY = env.str('STRIPE_SECRET_KEY')
 
 STRIPE_PRICE_ID_SMALL_TEAM = 'prod_MFX80iYazTbcaI'
 STRIPE_PRICE_ID_BIG_TEAM = 'prod_MFXCejhcyKyMpO'
+
+
+
+
