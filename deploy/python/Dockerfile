@@ -12,7 +12,7 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN python src/manage.py collectstatic --no-input
+RUN python ganarcrm_django/manage.py collectstatic --no-input
 
 EXPOSE 8000
 
