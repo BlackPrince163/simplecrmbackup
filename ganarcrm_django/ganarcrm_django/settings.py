@@ -161,8 +161,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Stripe
 
-STRIPE_PUB_KEY = env.str('STRIPE_PUB_KEY')
-STRIPE_SECRET_KEY = env.str('STRIPE_SECRET_KEY')
+STRIPE_PUB_KEY = env.str('STRIPE_PUB_KEY', default="pk_test_51LX1vgAINmzHAkQF5j75litKtqRjoPknJlvoI0vlnW2se2ZGjtVXs1Kye93nXDiJEIF1tpoHdiLYoHdzS4rrW5FD00OQisRmOB")
+STRIPE_SECRET_KEY = env.str('STRIPE_SECRET_KEY', default="sk_test_51LX1vgAINmzHAkQFXVNjBkuWa2jRpWdpbha3VByPeiMexnClIVaD4JvqLQ7M1Z5LsjVmHmQNn8gK09bdh7gV9Aq7004ZBMhmme")
 
 STRIPE_PRICE_ID_SMALL_TEAM = 'prod_MFX80iYazTbcaI'
 STRIPE_PRICE_ID_BIG_TEAM = 'prod_MFXCejhcyKyMpO'
