@@ -33,7 +33,7 @@ SECRET_KEY = env.str("SECRET_KEY", default="django-insecure-5rjs0cu*f0gnub-l-7&p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["app"]
+ALLOWED_HOSTS = ["*"]
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:8080',

@@ -4,11 +4,14 @@ from rest_framework.routers import DefaultRouter
 
 from clients.views import ClientViewSet, NoteViewSet, convert_lead_to_client, delete_client
 
+from clients.views import test_views
+
 router = DefaultRouter()
 router.register('clients', ClientViewSet, basename="clients")
 router.register('notes', NoteViewSet, basename="notes")
 
 urlpatterns = [
+    path('test/', test_views, name='test_views'),
     path('convert_lead_to_client/', convert_lead_to_client, name='convert_lead_to_client'),
     path('clients/delete_client/<int:client_id>/', delete_client, name='delete_client'),
     path('', include(router.urls))

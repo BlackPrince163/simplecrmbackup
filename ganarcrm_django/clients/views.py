@@ -1,3 +1,5 @@
+from http.client import HTTPResponse
+
 from rest_framework import viewsets, filters
 from django.http import Http404
 
@@ -9,6 +11,11 @@ from lead.models import Lead
 from team.models import Team
 from .models import Client, Note
 from .serializers import ClientSerializer, NoteSerializer
+from django.http import HttpResponse
+
+
+def test_views(request):
+    return HttpResponse("Test v1")
 
 
 class ClientPagination(PageNumberPagination):
