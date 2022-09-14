@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+import os
+
 import environ
 from pathlib import Path
 
@@ -103,14 +105,15 @@ WSGI_APPLICATION = 'ganarcrm_django.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": env.str("DATABASES_NAME", default="simplecrm"),
-        "USER": env.str("DATABASES_USER", default="simplecrm"),
-        "PASSWORD": env.str("DATABASES_PASSWORD", default="simplecrm"),
-        "HOST": env.str("DATABASES_HOST", default="127.0.0.1"),
-        "PORT": env.int("DATABASES_PORT", default="5432"),
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.environ.get("DB_NAME", "simplecrm"),
+        "USER": os.environ.get("DB_USER", "simplecrm"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", "simplecrm"),
+        "HOST": os.environ.get("DB_HOST", "127.0.0.1"),
+        "PORT": os.environ.get("DB_PORT", "5432"),
     }
 }
+
 
 
 # Password validation
