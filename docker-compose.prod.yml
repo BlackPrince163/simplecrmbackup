@@ -4,10 +4,15 @@ services:
   nginx:
     image: simplecrm-nginx:latest
     ports:
-      - 80:80
+      - 80
     build:
       context: .
       dockerfile: deploy/nginx/Dockerfile
+    environment:
+      - VIRTUAL_HOST=simplecrm.local
+    networks:
+      - default
+      - web
     depends_on:
       - app
     restart: always
@@ -38,3 +43,9 @@ services:
 
 volumes:
   db:
+
+
+networks:
+  web:
+    external:
+      name: web
